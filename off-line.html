@@ -1,0 +1,33 @@
+
+<dom-module id="off-line">
+    <style>
+        :host{
+            /*width: 100%;*/
+            display: block;
+            color: red;
+            font-size: 27px;
+        }
+        :host[hidden]{
+            display: none;
+        }
+    </style>
+    <template>
+        OFFLINE
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: "off-line",
+        ready: function(){
+            this.onlineStatus();
+            window.addEventListener('online',  this.onlineStatus.bind(this));
+            window.addEventListener('offline', this.onlineStatus.bind(this));
+        },
+        onlineStatus: function(){
+            // console.log('online',navigator.onLine);
+            this.hidden = navigator.onLine;
+            // this.set('offline',navigator.onLine?false:true);
+        }
+    });
+</script>
